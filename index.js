@@ -1,11 +1,15 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const routes = require('./routes/api');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
+//connect to database
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
@@ -20,8 +24,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.send('Welcome to Express');
+app.use(bodyParser.json());
+
+app.use('/api', routes);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  next();
 });
 
 app.listen(port, () => {

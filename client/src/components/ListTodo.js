@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ListTodo = ({ todos, deleteTodo }) => {
 
   return (
@@ -8,7 +10,7 @@ const ListTodo = ({ todos, deleteTodo }) => {
             (
               todos.map(todo => {
                 return (
-                  <li key={todo._id} onClick={() => deleteTodo(todo.id)}>{todo.action}
+                  <li key={todo._id} onClick={() => deleteTodo(todo._id)}>{todo.action}</li>
                 )
               })
             )

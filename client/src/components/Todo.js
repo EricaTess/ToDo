@@ -28,7 +28,9 @@ class Todo extends Component {
 
   deleteTodo = (id) => {
 
-    axios.delete('/api/todos/${id}')
+    console.log("Calling Delete Todo with id: " + id);
+
+    axios.delete(`/api/todos/${id}`)
       .then(res => {
         if(res.data){
           this.getTodos()
@@ -45,7 +47,7 @@ class Todo extends Component {
         <h1>My Todo(s)</h1>
         <Input getTodos={this.getTodos}/>
         <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
-      <div>
+      </div>
     )
   }
 }
